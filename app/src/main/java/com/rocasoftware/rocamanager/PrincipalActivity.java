@@ -1,6 +1,8 @@
 package com.rocasoftware.rocamanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,27 +12,39 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class PrincipalActivity extends AppCompatActivity {
 
-    TextView tituloTextView;
-    Button logoutButton;
+    TextView nombreCompletoTextView;
+    CardView logoutCardView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        tituloTextView = findViewById(R.id.tituloTextView);
-        logoutButton = findViewById(R.id.logoutButton);
+        nombreCompletoTextView = findViewById(R.id.nombreCompletoTextView);
+        logoutCardView = findViewById(R.id.logoutCardView);
+
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
         if (user != null)
         {
-            tituloTextView.setText(user.getEmail());
+            nombreCompletoTextView.setText(user.getEmail());
         }
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        logoutCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();

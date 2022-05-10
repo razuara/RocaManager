@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,61 +8,316 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="473dp"
-        android:layout_weight="0.7"
-        android:background="@drawable/background"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="615dp">
-
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="100dp"
-                android:layout_height="67dp"
-                android:layout_marginTop="44dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/manager_logo" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tituloTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Principal"
+                android:text="RocaRides Manager"
                 android:textColor="#ffffff"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bienvenido,"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/nombreCompletoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text=""
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true">
+
+                <RelativeLayout
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_card"
+                    android:minHeight="100dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textViewSub1Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Conductores"
+                        android:textSize="20sp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/textViewSub1Title"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Listado y configuracion de tus Conductores."
+                        android:textSize="15sp" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:maxHeight="90dp"
+                        android:src="@drawable/conductor" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true">
+
+                <RelativeLayout
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_card"
+                    android:minHeight="100dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textViewSub2Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Vehiculos"
+                        android:textSize="20sp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/textViewSub2Title"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Listado y configuracion de tus vehiculos."
+                        android:textSize="15sp" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:maxHeight="90dp"
+                        android:src="@drawable/vehiculos" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true">
+
+                <RelativeLayout
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_card"
+                    android:minHeight="100dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textViewSub3Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Viajes"
+                        android:textSize="20sp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/textViewSub3Title"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Listado y configuracion de tus viajes,\npreprogramados"
+                        android:textSize="15sp" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:maxHeight="90dp"
+                        android:src="@drawable/viajes" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true">
+
+                <RelativeLayout
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_card"
+                    android:minHeight="100dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textViewSub4Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Configuración de Usuario"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/textViewSub4Title"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Configuracion de tu Perfil de usuario,\ny tu documentación"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:maxHeight="90dp"
+                        android:src="@drawable/perfil_usuario" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/logoutCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true">
+
+                <RelativeLayout
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_card"
+                    android:minHeight="100dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textViewSub6Title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Log Out"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/textViewSub6Title"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/abel"
+                        android:paddingTop="10dp"
+                        android:text="Salir de la aplicación."
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:maxHeight="90dp"
+                        android:src="@drawable/logout" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:gravity="center"
-        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/logoutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="64dp"
-            android:layout_marginRight="64dp"
-            android:background="@drawable/background_login_btn"
-            android:text="LogOut"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
 
-    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+
 </LinearLayout>
