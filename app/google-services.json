@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "262425366314",
+    "project_id": "rocarides-1fa9c",
+    "storage_bucket": "rocarides-1fa9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262425366314:android:1c60526fbcbe9bf0af1853",
+        "android_client_info": {
+          "package_name": "com.rocasoftware.rocamanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262425366314-to94gs0s6gmuu1vva0arldnnu4i2gns6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpkHsWvu5_Gq4YjvQsl7sMbtRieO-aNws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262425366314-to94gs0s6gmuu1vva0arldnnu4i2gns6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
