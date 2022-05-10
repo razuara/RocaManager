@@ -23,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class RegistroActivity extends AppCompatActivity {
@@ -31,8 +33,7 @@ public class RegistroActivity extends AppCompatActivity {
     Button registrarButton;
 
     private FirebaseAuth mAuth;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("usuarios");
+    DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,9 @@ public class RegistroActivity extends AppCompatActivity {
         repetirpasswordEditText = findViewById(R.id.repetirpasswordEditText);
         registrarButton = findViewById(R.id.registrarButton);
 
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         registrarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +58,7 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
+
 
     }
 
@@ -105,8 +109,6 @@ public class RegistroActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-
-                            String UID = mAuth.getUid().toString();
                             String nombre = nombreEditText.getText().toString();
                             String apellido = apellidoEditText.getText().toString();
                             String telefono = telefonoEditText.getText().toString();
@@ -115,24 +117,27 @@ public class RegistroActivity extends AppCompatActivity {
                             String fechaUltimoLogin = getTimeDate();
                             String tipo = "Manager";
 
-                            usuario usuario = new usuario(UID,nombre,apellido,telefono,email,fechaRegistro,fechaUltimoLogin,tipo);
+                            Map<String,Object> map = new HashMap<>();
+                            map.put("nombre",nombre);
+                            map.put("apellido",apellido);
+                            map.put("telefono",telefono);
+                            map.put("email",email);
+                            map.put("fechaRegistro",fechaRegistro);
+                            map.put("fechaUltimoLogin",fechaUltimoLogin);
+                            map.put("tipo",tipo);
 
-                            dbUsuario dbUsuario = new dbUsuario();
-
-                            dbUsuario.add(usuario).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            String UID = mAuth.getUid().toString();
+                            mDatabase.child("usuario").child(UID).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onSuccess(Void unused) {
-                                    Intent intent = new Intent(RegistroActivity.this,LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(RegistroActivity.this, "Fallo en registrarse", Toast.LENGTH_SHORT).show();
+                                public void onComplete(@NonNull Task<Void> task2) {
+                                    if (task2.isSuccessful())
+                                    {
+                                        Intent intent = new Intent(RegistroActivity.this,PrincipalActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                 }
                             });
-
 
                         }
                         else
