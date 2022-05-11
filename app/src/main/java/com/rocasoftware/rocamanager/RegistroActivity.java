@@ -109,10 +109,10 @@ public class RegistroActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            String nombre = nombreEditText.getText().toString();
-                            String apellido = apellidoEditText.getText().toString();
-                            String telefono = telefonoEditText.getText().toString();
-                            String email = emailEditText.getText().toString();
+                            String nombre = nombreEditText.getText().toString().trim();
+                            String apellido = apellidoEditText.getText().toString().trim();
+                            String telefono = telefonoEditText.getText().toString().trim();
+                            String email = emailEditText.getText().toString().trim();
                             String fechaRegistro = getTimeDate();
                             String fechaUltimoLogin = getTimeDate();
 

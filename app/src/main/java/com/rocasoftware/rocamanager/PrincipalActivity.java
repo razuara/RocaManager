@@ -46,7 +46,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 {
                     String nombre = snapshot.child("nombre").getValue().toString();
                     String apellido = snapshot.child("apellido").getValue().toString();
-                    nombreCompletoTextView.setText(nombre + apellido);
+                    nombreCompletoTextView.setText(nombre +" "+ apellido);
                 }
             }
 
