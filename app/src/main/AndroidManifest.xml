@@ -10,9 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RocaManager">
         <activity
-            android:name=".PrincipalActivity"
+            android:name=".ConductorRegistroActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ConductoresActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".PrincipalActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".OlvidasteContraActivity"
             android:exported="false"

@@ -22,8 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 public class PrincipalActivity extends AppCompatActivity {
 
     TextView nombreCompletoTextView;
-    CardView logoutCardView;
-
+    CardView conductoresCardView,logoutCardView;
+    DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +31,40 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
 
         nombreCompletoTextView = findViewById(R.id.nombreCompletoTextView);
+        conductoresCardView = findViewById(R.id.conductoresCardView);
         logoutCardView = findViewById(R.id.logoutCardView);
 
 
-
+        //hace referencia al nodo principal de la base de datos
+        mDatabase = FirebaseDatabase.getInstance().getReference("usuarios").child("managers");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        mDatabase.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists())
+                {
+                    String nombre = snapshot.child("nombre").getValue().toString();
+                    String apellido = snapshot.child("apellido").getValue().toString();
+                    nombreCompletoTextView.setText(nombre + apellido);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                nombreCompletoTextView.setText("Error");
+            }
+        });
 
 
-        if (user != null)
-        {
-            nombreCompletoTextView.setText(user.getEmail());
-        }
+        conductoresCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PrincipalActivity.this,ConductoresActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         logoutCardView.setOnClickListener(new View.OnClickListener() {
             @Override

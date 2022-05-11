@@ -115,7 +115,6 @@ public class RegistroActivity extends AppCompatActivity {
                             String email = emailEditText.getText().toString();
                             String fechaRegistro = getTimeDate();
                             String fechaUltimoLogin = getTimeDate();
-                            String tipo = "Manager";
 
                             Map<String,Object> map = new HashMap<>();
                             map.put("nombre",nombre);
@@ -124,10 +123,14 @@ public class RegistroActivity extends AppCompatActivity {
                             map.put("email",email);
                             map.put("fechaRegistro",fechaRegistro);
                             map.put("fechaUltimoLogin",fechaUltimoLogin);
-                            map.put("tipo",tipo);
+
 
                             String UID = mAuth.getUid().toString();
-                            mDatabase.child("usuario").child(UID).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            mDatabase.child("usuarios")
+                                    .child("managers")
+                                    .child(UID)
+                                    .setValue(map)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task2) {
                                     if (task2.isSuccessful())

@@ -17,7 +17,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
@@ -27,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView registroTextView,olvidastePasswordTextView;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +47,12 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user!=null)
         {
+            mDatabase = FirebaseDatabase.getInstance().getReference("usuarios").child("managers");
+            String fechaUltimoLogin = getTimeDate();
+            Map<String,Object> map = new HashMap<>();
+            map.put("fechaUltimoLogin",fechaUltimoLogin);
+            mDatabase.child(user.getUid()).updateChildren(map);
+
             Intent intent = new Intent(LoginActivity.this,PrincipalActivity.class);
             startActivity(intent);
             finish();
@@ -116,6 +134,13 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            mDatabase = FirebaseDatabase.getInstance().getReference("usuarios").child("managers");
+                            String fechaUltimoLogin = getTimeDate();
+                            Map<String,Object> map = new HashMap<>();
+                            map.put("fechaUltimoLogin",fechaUltimoLogin);
+                            mDatabase.child(user.getUid()).updateChildren(map);
+
                             Intent intent = new Intent(LoginActivity.this,PrincipalActivity.class);
                             startActivity(intent);
                             finish();
@@ -126,6 +151,16 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public static String getTimeDate() { // without parameter argument
+        try{
+            Date netDate = new Date(); // current time from here
+            SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+            return sfd.format(netDate);
+        } catch(Exception e) {
+            return "date";
+        }
     }
 
 }
