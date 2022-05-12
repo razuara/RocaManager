@@ -1,5 +1,6 @@
 package com.rocasoftware.rocamanager;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,8 @@ public class ConductorAdapter extends FirebaseRecyclerAdapter<ConductorModel,Con
                 .error(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark_normal)
                 .into(holder.img);
 
+
+
     }
 
     @NonNull
@@ -60,6 +63,20 @@ public class ConductorAdapter extends FirebaseRecyclerAdapter<ConductorModel,Con
             nombre = (TextView) itemView.findViewById(R.id.nombreCompletoTextView);
             cede = (TextView) itemView.findViewById(R.id.cedeTextView);
             email = (TextView) itemView.findViewById(R.id.emailTextView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //String idConductor = email.getText().toString();
+                    int position = getAdapterPosition();
+                    String idConductor = getRef(position).getKey();
+                    Intent intent = new Intent(itemView.getContext(),EditarConductorActivity.class);
+                    intent.putExtra("idConductor",idConductor);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
+
         }
     }
 
