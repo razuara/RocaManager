@@ -10,7 +10,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="635dp"
         android:background="@drawable/background">
 
         <LinearLayout
@@ -22,47 +22,55 @@
                 android:id="@+id/tituloTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:text="RocaRides Manager"
                 android:textColor="#ffffff"
                 android:textSize="25sp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Conductores"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Registro de Conductores"
+                android:textColor="#ffffff"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"/>
+                android:textStyle="bold" />
 
 
-            <Button
-                android:id="@+id/registroConductorButton"
-                android:layout_width="146dp"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="64dp"
-                android:background="@drawable/background_login_btn"
-                android:text="Registro"
-                android:textColor="#ffffff"
-                android:textSize="12sp" />
-
-
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/conductoresRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="200dp"
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
-
-
-
     </androidx.core.widget.NestedScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/registroConductorButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="64dp"
+            android:layout_marginRight="64dp"
+            android:background="@drawable/background_login_btn"
+            android:text="agregar"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 
 

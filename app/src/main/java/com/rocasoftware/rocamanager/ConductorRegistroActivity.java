@@ -106,16 +106,24 @@ public class ConductorRegistroActivity extends AppCompatActivity {
 
         String fechaRegistro = getTimeDate();
         String fechaUltimoLogin = getTimeDate();
-
+        String estadoCede = "San Luis Potosi";
+        String ciudadCede = "Cd. Valles";
+        String cede = ciudadCede+","+estadoCede;
+        String nombreCompleto = nombre+" "+apellido;
 
         Map<String,Object> map = new HashMap<>();
         map.put("nombre",nombre);
         map.put("apellido",apellido);
+        map.put("nombreCompleto",nombreCompleto);
         map.put("telefono",telefono);
         map.put("email",email);
         map.put("password",password);
         map.put("fechaRegistro",fechaRegistro);
         map.put("fechaUltimoLogin",fechaUltimoLogin);
+        map.put("ciudadCede",ciudadCede);
+        map.put("estadoCede",estadoCede);
+        map.put("cede",cede);
+        map.put("perfiImgSrc","");
 
         String UID = mAuth.getUid().toString();
         mDatabase.child("conductores")
