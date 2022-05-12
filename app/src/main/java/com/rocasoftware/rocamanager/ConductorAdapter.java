@@ -71,7 +71,7 @@ public class ConductorAdapter extends FirebaseRecyclerAdapter<ConductorModel,Con
                     //String idConductor = email.getText().toString();
                     int position = getAdapterPosition();
                     String idConductor = getRef(position).getKey();
-                    Intent intent = new Intent(itemView.getContext(),EditarConductorActivity.class);
+                    Intent intent = new Intent(itemView.getContext(), ConductorEditarActivity.class);
                     intent.putExtra("idConductor",idConductor);
                     itemView.getContext().startActivity(intent);
                 }
