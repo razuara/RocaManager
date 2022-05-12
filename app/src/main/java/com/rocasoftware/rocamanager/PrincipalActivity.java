@@ -35,27 +35,8 @@ public class PrincipalActivity extends AppCompatActivity {
         logoutCardView = findViewById(R.id.logoutCardView);
 
 
-        //hace referencia al nodo principal de la base de datos
-        mDatabase = FirebaseDatabase.getInstance().getReference("usuarios").child("managers");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        mDatabase.child(user.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists())
-                {
-                    String nombre = snapshot.child("nombre").getValue().toString();
-                    String apellido = snapshot.child("apellido").getValue().toString();
-                    nombreCompletoTextView.setText(nombre +" "+ apellido);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                nombreCompletoTextView.setText("Error");
-            }
-        });
-
+        String nombreCompleto = getIntent().getStringExtra("nombreCompleto");
+        nombreCompletoTextView.setText(nombreCompleto);
 
         conductoresCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +57,4 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

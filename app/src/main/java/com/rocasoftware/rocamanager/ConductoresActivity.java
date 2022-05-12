@@ -15,8 +15,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ConductoresActivity extends AppCompatActivity {
 
@@ -59,24 +62,6 @@ public class ConductoresActivity extends AppCompatActivity {
         conductorAdapter = new ConductorAdapter(options);
         recyclerView.setAdapter(conductorAdapter);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         registroConductorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +75,27 @@ public class ConductoresActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference("usuarios").child("managers").child(user.getUid());
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String nombre = snapshot.child("nombre").getValue().toString();
+                String apellido = snapshot.child("apellido").getValue().toString();
+                String nombreCompleto = nombre +" "+ apellido;
+
+                Intent intent = new Intent(ConductoresActivity.this,PrincipalActivity.class);
+                intent.putExtra("nombreCompleto",nombreCompleto);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         Intent intent = new Intent(ConductoresActivity.this,PrincipalActivity.class);
         startActivity(intent);
         finish();

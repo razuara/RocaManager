@@ -45,55 +45,42 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null)
-        {
-            mDatabase = FirebaseDatabase.getInstance().getReference("usuarios").child("managers");
-            String fechaUltimoLogin = getTimeDate();
-            Map<String,Object> map = new HashMap<>();
-            map.put("fechaUltimoLogin",fechaUltimoLogin);
-            mDatabase.child(user.getUid()).updateChildren(map);
 
-            Intent intent = new Intent(LoginActivity.this,PrincipalActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else
-        {
-            emailEditText = findViewById(R.id.emailEditText);
-            passwordEditText = findViewById(R.id.passwordEditText);
-            accesoButton = findViewById(R.id.accesoButton);
-            registroTextView = findViewById(R.id.registroTextView);
-            olvidastePasswordTextView = findViewById(R.id.olvidastePasswordTextView);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        accesoButton = findViewById(R.id.accesoButton);
+        registroTextView = findViewById(R.id.registroTextView);
+        olvidastePasswordTextView = findViewById(R.id.olvidastePasswordTextView);
 
-            mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-            //click a boton de acceso al sistema
-            accesoButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    validate();
-                }
-            });
+        //click a boton de acceso al sistema
+        accesoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accesoButton.setText("Cargando...");
+                validate();
+            }
+        });
 
-            //click para ir a registrar nuevo usuario
-            registroTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
+        //click para ir a registrar nuevo usuario
+        registroTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-            olvidastePasswordTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(LoginActivity.this, OlvidasteContraActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
+        olvidastePasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, OlvidasteContraActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void validate() {
@@ -135,15 +122,35 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String idUser= user.getUid();
                             mDatabase = FirebaseDatabase.getInstance().getReference("usuarios").child("managers");
                             String fechaUltimoLogin = getTimeDate();
                             Map<String,Object> map = new HashMap<>();
                             map.put("fechaUltimoLogin",fechaUltimoLogin);
                             mDatabase.child(user.getUid()).updateChildren(map);
 
-                            Intent intent = new Intent(LoginActivity.this,PrincipalActivity.class);
-                            startActivity(intent);
-                            finish();
+                            mDatabase = FirebaseDatabase.getInstance().getReference("usuarios").child("managers");
+                            mDatabase.child(idUser).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.exists())
+                                    {
+                                        String nombre = snapshot.child("nombre").getValue().toString();
+                                        String apellido = snapshot.child("apellido").getValue().toString();
+                                        String nombreCompleto = nombre +" "+ apellido;
+
+                                        Intent intent = new Intent(LoginActivity.this,PrincipalActivity.class);
+                                        intent.putExtra("nombreCompleto",nombreCompleto);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
                         else
                         {

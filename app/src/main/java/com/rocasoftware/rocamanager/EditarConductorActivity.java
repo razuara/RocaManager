@@ -1,8 +1,10 @@
 package com.rocasoftware.rocamanager;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +31,7 @@ import java.util.regex.Pattern;
 public class EditarConductorActivity extends AppCompatActivity {
 
     TextView nombreEditText,apellidoEditText,telefonoEditText,emailEditText,passwordEditText,repetirPasswordEditText;
-    Button actualizarButton;
+    Button actualizarButton,borrarButton;
     DatabaseReference mDatabase;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -44,6 +47,7 @@ public class EditarConductorActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         repetirPasswordEditText = findViewById(R.id.repetirPasswordEditText);
         actualizarButton = findViewById(R.id.actualizarButton);
+        borrarButton = findViewById(R.id.borrarButton);
 
 
 
@@ -88,6 +92,43 @@ public class EditarConductorActivity extends AppCompatActivity {
             }
         });
 
+        borrarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                CreateAlertDialog();
+
+
+            }
+        });
+    }
+
+    private void CreateAlertDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Seguro que quieres borrar este conductor?");
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String idConductor = getIntent().getStringExtra("idConductor");
+                mDatabase = FirebaseDatabase.getInstance().getReference("conductores").child(user.getUid()).child(idConductor);
+                mDatabase.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Intent intent = new Intent(EditarConductorActivity.this,ConductoresActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+            }
+        });
+        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(EditarConductorActivity.this,"Proceso Cancelado",Toast.LENGTH_LONG).show();
+            }
+        });
+        dialog.create();
+        dialog.show();
 
     }
 
