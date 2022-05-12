@@ -13,7 +13,8 @@
         android:theme="@style/Theme.RocaManager">
         <activity
             android:name=".EditarConductorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ConductorRegistroActivity"
             android:exported="false"
