@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class PrincipalActivity extends AppCompatActivity {
 
     TextView nombreCompletoTextView;
-    CardView conductoresCardView,vehiculosCardView,logoutCardView;
+    CardView conductoresCardView,vehiculosCardView,viajesCardView,logoutCardView;
     DatabaseReference mDatabase;
 
     @Override
@@ -33,6 +33,7 @@ public class PrincipalActivity extends AppCompatActivity {
         nombreCompletoTextView = findViewById(R.id.nombreCompletoTextView);
         conductoresCardView = findViewById(R.id.conductoresCardView);
         vehiculosCardView = findViewById(R.id.vehiculosCardView);
+        viajesCardView = findViewById(R.id.viajesCardView);
         logoutCardView = findViewById(R.id.logoutCardView);
 
 
@@ -56,6 +57,16 @@ public class PrincipalActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        viajesCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PrincipalActivity.this,ViajesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         logoutCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

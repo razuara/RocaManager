@@ -24,7 +24,7 @@
         android:layout_below="@+id/logoManagerImage"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/abel"
-        android:text="Roca Manager"
+        android:text="@string/app_name"
         android:textAlignment="center"
         android:textSize="35sp">
 
