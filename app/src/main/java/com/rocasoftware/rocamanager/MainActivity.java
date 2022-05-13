@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             String nombre = snapshot.child("nombre").getValue().toString();
                             String apellido = snapshot.child("apellido").getValue().toString();
-                            String nombreCompleto = nombre +" "+ apellido;
+                            String nombreCompleto ="Bienvenido, "+ nombre +" "+ apellido;
 
                             Intent intent = new Intent(MainActivity.this,PrincipalActivity.class);
                             intent.putExtra("nombreCompleto",nombreCompleto);

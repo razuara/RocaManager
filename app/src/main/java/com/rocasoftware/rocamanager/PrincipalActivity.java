@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +24,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     TextView nombreCompletoTextView;
     CardView conductoresCardView,vehiculosCardView,viajesCardView,logoutCardView;
+    androidx.appcompat.widget.Toolbar myToolbar;
     DatabaseReference mDatabase;
 
     @Override
@@ -35,6 +37,9 @@ public class PrincipalActivity extends AppCompatActivity {
         vehiculosCardView = findViewById(R.id.vehiculosCardView);
         viajesCardView = findViewById(R.id.viajesCardView);
         logoutCardView = findViewById(R.id.logoutCardView);
+
+        myToolbar = findViewById(R.id.myToolbar);
+        setSupportActionBar(myToolbar);
 
 
         String nombreCompleto = getIntent().getStringExtra("nombreCompleto");

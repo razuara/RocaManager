@@ -12,8 +12,9 @@
         android:layout_width="144dp"
         android:layout_height="180dp"
         android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="130dp"
-        android:layout_marginTop="245dp"
+        android:layout_marginTop="138dp"
         android:src="@drawable/manager_logo">
 
     </ImageView>
@@ -25,6 +26,8 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/abel"
         android:text="@string/app_name"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:textSize="35sp">
 
