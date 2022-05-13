@@ -12,11 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RocaManager">
         <activity
+            android:name=".VehiculoEditarActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".VehiculoRegistroActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".VehiculosActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ConductorEditarActivity"
             android:exported="false"

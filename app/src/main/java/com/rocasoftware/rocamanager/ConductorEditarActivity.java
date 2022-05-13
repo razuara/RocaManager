@@ -44,8 +44,6 @@ public class ConductorEditarActivity extends AppCompatActivity {
         actualizarButton = findViewById(R.id.actualizarButton);
         borrarButton = findViewById(R.id.borrarButton);
 
-
-
         emailEditText.setFocusable(false);
         emailEditText.setClickable(false);
 

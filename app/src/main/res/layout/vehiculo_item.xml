@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:elevation="6dp"
+    app:cardUseCompatPadding="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/vehiculoImgSrcImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"></de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/marcaTituloTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/vehiculoImgSrcImage"
+            android:text="Marca :"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/marcaTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/marcaTituloTextView"
+            android:text="Marca"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/tipoTituloTextView"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/marcaTextView"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/vehiculoImgSrcImage"
+            android:text="Tipo :"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/tipoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@+id/tipoTituloTextView"
+            android:layout_below="@+id/marcaTextView"
+            android:layout_marginLeft="5dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/colorTituloTextView"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tipoTextView"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/vehiculoImgSrcImage"
+            android:text="Color :"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/colorTextView"
+            android:layout_width="242dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tipoTextView"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/colorTituloTextView"
+            android:text="Color"
+            android:textColor="@color/black"
+            android:textSize="20sp"></TextView>
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

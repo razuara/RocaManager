@@ -96,11 +96,11 @@ public class VehiculoRegistroActivity extends AppCompatActivity {
         }
         else
         {
-            registrar(tipo,marca,modelo,color,placa);
+            registrar(tipo,marca,modelo,color,serie,placa);
         }
     }
 
-    private void registrar(String tipo, String marca, String modelo, String color, String placa) {
+    private void registrar(String tipo, String marca, String modelo, String color,String serie, String placa) {
         String fechaRegistro = getTimeDate();
 
         Map<String,Object> map = new HashMap<>();
@@ -109,6 +109,7 @@ public class VehiculoRegistroActivity extends AppCompatActivity {
         map.put("marca",marca);
         map.put("modelo",modelo);
         map.put("color",color);
+        map.put("serie",serie);
         map.put("placa",placa);
         map.put("vehiculoImgSrc","");
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,20 +21,43 @@ import com.google.firebase.database.ValueEventListener;
 
 public class VehiculosActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-
+    VehiculoAdapter vehiculoAdapter;
     Button registroVehiculoButton;
     private DatabaseReference mDatabase;
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        vehiculoAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        vehiculoAdapter.stopListening();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehiculos);
 
-        recyclerView = (RecyclerView)findViewById(R.id.conductoresRecyclerView);
+        recyclerView = (RecyclerView)findViewById(R.id.vehiculosRecyclerView);
         registroVehiculoButton = findViewById(R.id.registroVehiculoButton);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        FirebaseRecyclerOptions<VehiculoModel> options =
+                new FirebaseRecyclerOptions.Builder<VehiculoModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference()
+                                .child("vehiculos")
+                                .child(user.getUid()), VehiculoModel.class)
+                        .build();
+        vehiculoAdapter = new VehiculoAdapter(options);
+        recyclerView.setAdapter(vehiculoAdapter);
 
 
         registroVehiculoButton.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +95,6 @@ public class VehiculosActivity extends AppCompatActivity {
 
             }
         });
-        Intent intent = new Intent(VehiculosActivity.this,PrincipalActivity.class);
-        startActivity(intent);
-        finish();
+
     }
 }

@@ -96,8 +96,6 @@ public class ConductoresActivity extends AppCompatActivity {
 
             }
         });
-        Intent intent = new Intent(ConductoresActivity.this,PrincipalActivity.class);
-        startActivity(intent);
-        finish();
+
     }
 }
